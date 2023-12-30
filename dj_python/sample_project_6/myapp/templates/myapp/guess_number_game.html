@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #game-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 8px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Guess the Number Game</h1>
+
+    <div id="game-container">
+        <p>Guess a number between 1 and 100:</p>
+        <input type="number" id="userGuess" placeholder="Enter your guess">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <p id="feedback"></p>
+    </div>
+
+    <script>
+        // JavaScript logic for the game
+        const targetNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('userGuess').value);
+            attempts++;
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                document.getElementById('feedback').innerHTML = 'Please enter a valid number between 1 and 100.';
+            } else if (userGuess === targetNumber) {
+                document.getElementById('feedback').innerHTML = `Congratulations! You guessed the number ${targetNumber} in ${attempts} attempts.`;
+            } else {
+                const hint = userGuess < targetNumber ? 'higher' : 'lower';
+                document.getElementById('feedback').innerHTML = `Try again! The number is ${hint}.`;
+            }
+        }
+    </script>
+
+</body>
+</html>
